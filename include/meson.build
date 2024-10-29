@@ -1,0 +1,1 @@
+install_headers('hellomeson-macros.h', 'hellomeson.h')

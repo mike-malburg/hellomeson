@@ -1,10 +1,15 @@
-$outDir = $currentDirectory = "builddir"
+$buildDir = "builddir"
 
-Write-Host $outDir
-if(Test-Path $outDir) {
-   Remove-Item -Recurse -Force $outDir
+Write-Host $buildDir
+if(Test-Path $buildDir) {
+   Write-Host "Removing: $buildDir..."
+   Remove-Item -Recurse -Force $buildDir
 }
-New-Item $outDir -ItemType Directory
-meson setup $outDir
-meson compile -C $outDir
-meson install -C $outDir
+New-Item $buildDir -ItemType Directory
+meson setup $buildDir
+Push-Location $buildDir
+meson compile
+meson test --verbose
+meson install
+Pop-Location
+

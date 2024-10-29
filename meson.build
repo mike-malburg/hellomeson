@@ -1,14 +1,23 @@
-project('helloworldmeson', 'cpp', version: '1.0.0')
+project(
+  'hellomeson',
+  'cpp', 
+  version: '1.0.0'
+)
 
 # Define exports for windows
 cpp_args = []
 if host_machine.system() == 'windows' and get_option('default_library') == 'shared'
-    cpp_args += '-DHELLOWORLDLIB_EXPORTS'
+    cpp_args += '-DHELLOMESON_EXPORTS'
 endif
 
-# Define a shared library
-lib = shared_library('HelloWorldLib', 'HelloWorld.cpp', cpp_args : cpp_args)
+inc = include_directories('include')
+subdir('include')
+subdir('src')
+subdir('test')
 
-# Define an executable that links with the library
-executable('HelloWorldApp', 'main.cpp', link_with: lib)
-
+pkg_mod = import('pkgconfig')
+pkg_mod.generate(libraries : hellomesonlib,
+                 version : '1.0',
+                 name : 'libhellomeson',
+                 filebase : 'hellomeson',
+                 description : 'A test C++ library, built with meson.')
