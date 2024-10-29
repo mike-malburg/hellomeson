@@ -1,5 +1,5 @@
 project(
-    'helloworldlib', 
+    'helloworldmeson', 
     'cpp', 
     version : '1.0.0'
 )
@@ -29,4 +29,16 @@ executable(
     link_with : helloworldlib,
     install : true,
     install_dir : bin_dir
+)
+
+# HelloWorldLib.pc
+pkg = import('pkgconfig')
+pkg.generate(helloworldlib,
+  name: 'HelloWorld Meson Sample',
+  filebase: 'HelloWorldLib',
+  description: 'HelloWorld Meson Sample',
+  extra_cflags: cpp_args,
+  subdirs: 'HelloWorldLib',
+  version: meson.project_version(),
+  install_dir: bin_dir / 'pkgconfig'
 )
