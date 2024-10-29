@@ -1,13 +1,13 @@
 $buildDir = "builddir"
-
 Write-Host $buildDir
 if(Test-Path $buildDir) {
    Write-Host "Removing: $buildDir..."
    Remove-Item -Recurse -Force $buildDir
 }
-New-Item $buildDir -ItemType Directory
-meson setup $buildDir
-Push-Location $buildDir
+$dir = (New-Item $buildDir -ItemType Directory).FullName
+Write-Host "Building to: $dir"
+meson setup builddir --prefix=$dir
+Push-Location $dir
 meson compile
 meson test --verbose
 meson install
