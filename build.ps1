@@ -1,4 +1,4 @@
-$outDir = $currentDirectory = "$((Get-Location).Path)/out"
+$outDir = $currentDirectory = "builddir"
 
 Write-Host $outDir
 if(Test-Path $outDir) {
@@ -8,4 +8,3 @@ New-Item $outDir -ItemType Directory
 meson setup $outDir
 meson compile -C $outDir
 meson install -C $outDir
-Pop-Location
