@@ -1,5 +1,5 @@
 #pragma once
-#include "hellomeson-macros.h"
+#include "hellomesonmacros.h"
 #include <string>
 
 NAMESPACE_HELLOMESON_START
